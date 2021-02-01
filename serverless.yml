@@ -64,22 +64,31 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
+  personas:
+    handler: StarWars.personas
+    events:
+      - httpApi:
+          path: /api/personas
+          method: get    
+
+  insertarPersona:
+    handler: personaInsertar.insertarPersona
+    events:
+      - httpApi:
+          path: /api/insertarPersona
+          method: post
+  
+  obtenerPersona:
+    handler: personaObtener.obtenerPersona
+    events:
+      - httpApi:
+          path: /api/obtenerPersona
+          method: get  
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
 #    Check the event documentation for details
-    events:
-      - httpApi:
-          path: /api/obtenerPersonas
-          method: get
-
-  actualizarPersona:
-    handler : handler.actualizarPersona
-    event:
-      -httpApi:
-        path : /api/actualizarPersona
-        method: post
+    
+      
           
 #      - websocket: $connect
 #      - s3: ${env:BUCKET}
@@ -111,8 +120,7 @@ functions:
 #            path: /hello
 
 #    Define function environment variables here
-#    environment:
-#      variable2: value2
+   
 
 # you can add CloudFormation resource templates here
 #resources:
